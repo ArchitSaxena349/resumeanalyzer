@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📄 ResumeAnalyzer
 
-## Getting Started
+A powerful, no-nonsense resume parsing and analysis tool for modern hiring pipelines. Whether you're screening candidates or building an AI assistant, `ResumeAnalyzer` extracts, analyzes, and organizes resume data like a boss.
 
-First, run the development server:
+> Built with Python. Driven by automation. Made for HRs, devs, and resume warriors alike.
+
+---
+
+## 🚀 Features
+
+- 🔍 **Resume Parsing** — Extracts key info from resumes (name, email, skills, experience, etc.)
+- 🧠 **Skill & Keyword Matching** — Compare resumes against job descriptions
+- 📊 **Candidate Scoring** — Rate candidates based on skill alignment
+- 💼 **Multiple Format Support** — Works with PDF, DOCX, etc.
+- ⚡ **Fast & Scalable** — Built for batch processing
+
+---
+
+## 🧠 Tech Stack
+
+- Python 🐍
+- [spaCy](https://spacy.io/) — NLP Magic
+- [PyPDF2 / python-docx](https://pypi.org/project/python-docx/) — For reading resumes
+- [Streamlit](https://streamlit.io/) (if included for UI)
+- Pandas, Regex, JSON, and other tasty libraries
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+resumeanalyzer/
+├── data/               # Sample resumes and datasets
+├── parser/             # Core logic to extract data
+├── matcher/            # JD-resume comparison logic
+├── utils/              # Helper functions and modules
+├── main.py             # Entry point
+├── requirements.txt    # Dependencies
+└── README.md           # You're reading this ;)
+````
+
+---
+
+## ⚙️ Installation
+
+Clone this bad boy:
+
+```bash
+git clone https://github.com/ArchitSaxena349/resumeanalyzer.git
+cd resumeanalyzer
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install the dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pip install -r requirements.txt
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧪 Usage
 
-To learn more about Next.js, take a look at the following resources:
+**Basic CLI:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+python main.py --resume path/to/resume.pdf --job path/to/job_description.txt
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Possible Output:**
 
-## Deploy on Vercel
+* Extracted fields (Name, Email, Skills, etc.)
+* Skill match score
+* Recommendations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Optional Streamlit UI (if applicable):**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+streamlit run main.py
+```
+
+---
+
+## 🔍 Sample Use Cases
+
+* Automate resume screening in recruitment processes
+* Build a personalized career assistant
+* Match freelancers to projects based on skillsets
+* Research skills gap in applicant pools
+
+---
+
+## 🛠️ TODOs / Improvements
+
+* [ ] Add LLM-based semantic comparison
+* [ ] Integrate LinkedIn scraping
+* [ ] Add support for image-based resumes (OCR)
+* [ ] Export to CSV / JSON
+* [ ] Dockerize the app
+
+---
+
+## 🤝 Contributing
+
+PRs are welcome! Please fork the repo and make a pull request from a feature branch.
+
+If you find bugs, raise an [issue](https://github.com/ArchitSaxena349/resumeanalyzer/issues), not your blood pressure.
+
+---
+
+## 📜 License
+
+MIT License. Use it, abuse it (ethically), and don’t forget to give credit. ✌️
+
+---
+
+## 👨‍💻 Made by [Archit Saxena](https://github.com/ArchitSaxena349)
+
+Stay curious. Stay caffeinated.
+
+```
+
+---
+
+Let me know if you want this version auto-pushed as a `README.md` to the repo, or customized for a `Streamlit` app if that's part of it too.
+```
