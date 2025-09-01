@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 interface ResumeAnalysis {
@@ -48,7 +48,7 @@ export default function ResumeResults() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600 mx-auto"></div>
           <p className="mt-4 text-lg">Analyzing your resume...</p>
         </div>
       </div>
@@ -83,63 +83,67 @@ export default function ResumeResults() {
       </div>
 
       <div className="space-y-8">
+        {/* ATS Score Section */}
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-2xl font-bold mb-4">ATS Score</h2>
           <div className="flex items-center">
-            <div className="text-4xl font-bold text-blue-600">
+            <div className="text-4xl font-bold text-rose-600">
               {analysis.atsScore}/100
             </div>
-            <div className="ml-4">
-              <div className="w-64 bg-gray-200 rounded-full h-4">
+            <div className="ml-4 flex-1">
+              <div className="w-full bg-gray-200 rounded-full h-4">
                 <div
-                  className="bg-blue-600 h-4 rounded-full"
+                  className="bg-rose-600 h-4 rounded-full transition-all duration-500"
                   style={{ width: `${analysis.atsScore}%` }}
                 ></div>
               </div>
+              <p className="text-sm text-gray-600 mt-2">
+                {analysis.atsScore >= 80 ? 'Excellent ATS compatibility' :
+                 analysis.atsScore >= 60 ? 'Good ATS compatibility' :
+                 'Needs improvement for better ATS compatibility'}
+              </p>
             </div>
           </div>
         </div>
 
+        {/* AI Analysis Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-2xl font-bold mb-4">Gemini Analysis</h2>
-            <div className="whitespace-pre-line bg-gray-50 p-4 rounded">
+            <div className="whitespace-pre-line bg-gray-50 p-4 rounded max-h-96 overflow-y-auto">
               {analysis.geminiAnalysis}
             </div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-2xl font-bold mb-4">OpenAI Analysis</h2>
-            <div className="whitespace-pre-line bg-gray-50 p-4 rounded">
-              {analysis.openaiAnalysis}
+            <div className="whitespace-pre-line bg-gray-50 p-4 rounded max-h-96 overflow-y-auto">
+              {typeof analysis.openaiAnalysis === 'string' 
+                ? analysis.openaiAnalysis 
+                : JSON.stringify(analysis.openaiAnalysis, null, 2)}
             </div>
           </div>
         </div>
 
+        {/* Keywords Section */}
         <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-2xl font-bold mb-4">Keywords Analysis</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 className="text-2xl font-bold mb-4">Keyword Analysis</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-xl font-semibold mb-2">Identified Keywords</h3>
+              <h3 className="text-lg font-semibold mb-3 text-green-600">Present Keywords</h3>
               <div className="flex flex-wrap gap-2">
                 {analysis.keywords.map((keyword, index) => (
-                  <span
-                    key={index}
-                    className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
-                  >
+                  <span key={index} className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
                     {keyword}
                   </span>
                 ))}
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-2">Missing Keywords</h3>
+              <h3 className="text-lg font-semibold mb-3 text-red-600">Missing Keywords</h3>
               <div className="flex flex-wrap gap-2">
                 {analysis.missingKeywords.map((keyword, index) => (
-                  <span
-                    key={index}
-                    className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm"
-                  >
+                  <span key={index} className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">
                     {keyword}
                   </span>
                 ))}
@@ -148,16 +152,14 @@ export default function ResumeResults() {
           </div>
         </div>
 
+        {/* Suggestions Section */}
         <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-2xl font-bold mb-4">Optimization Suggestions</h2>
-          <ul className="space-y-2">
+          <h2 className="text-2xl font-bold mb-4">Improvement Suggestions</h2>
+          <ul className="space-y-3">
             {analysis.suggestions.map((suggestion, index) => (
-              <li
-                key={index}
-                className="flex items-start"
-              >
-                <span className="text-blue-600 mr-2">•</span>
-                <span>{suggestion}</span>
+              <li key={index} className="flex items-start gap-3">
+                <span className="text-rose-500 mt-1">•</span>
+                <span className="text-gray-700">{suggestion}</span>
               </li>
             ))}
           </ul>

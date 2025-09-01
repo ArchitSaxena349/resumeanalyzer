@@ -1,5 +1,21 @@
+import { Suspense } from 'react';
 import ResumeResults from '@/app/components/ResumeResults';
 
+function LoadingFallback() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p className="mt-4 text-lg">Loading...</p>
+      </div>
+    </div>
+  );
+}
+
 export default function ResumeResultsPage() {
-  return <ResumeResults />;
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <ResumeResults />
+    </Suspense>
+  );
 } 

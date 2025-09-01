@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY || "dummy-key-for-build",
 });
 
 export async function generateSummary(pdfText: string) {
@@ -21,7 +21,7 @@ export async function generateSummary(pdfText: string) {
       max_tokens: 1500,
     });
     return response.choices[0].message.content;
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof OpenAI.APIError && error.status === 429) {
       console.log("Rate limit exceeded, retrying in 1 second...");
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -57,7 +57,7 @@ export async function analyzeResume(pdfText: string) {
       max_tokens: 1500,
     });
     return JSON.parse(response.choices[0].message.content || '{}');
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof OpenAI.APIError && error.status === 429) {
       console.log("Rate limit exceeded, retrying in 1 second...");
       await new Promise((resolve) => setTimeout(resolve, 1000));

@@ -23,8 +23,8 @@ export default function Uploadsection() {
         className="capitalizetalize text-3xl font-bold tracking-tight text-gray-900
           sm:text-4xl "
       >
-        <h1>Start Uploading Your PDF's</h1>
-        <p>Upload your PDF's and get a summary in seconds</p>
+        <h1>Start Uploading Your PDFs</h1>
+        <p>Upload your PDFs and get a summary in seconds</p>
       </div>
     </div>      
   );

@@ -1,6 +1,6 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 export async function analyzeResume(resumeText: string) {
   try {
@@ -19,41 +19,36 @@ export async function analyzeResume(resumeText: string) {
     
     Be specific and provide actionable feedback.`;
 
-    const response = await ai.models.generateContent({
-      model: "gemini-pro",
-      contents: prompt,
-    });
+    const model = ai.getGenerativeModel({ model: "gemini-pro" });
+    const response = await model.generateContent(prompt);
 
-    return response.text;
+    return response.response.text();
   } catch (error) {
     console.error("Error analyzing resume:", error);
     throw error;
   }
 }
 
-// Example usage
-async function main() {
-  const sampleResume = `
-    John Doe
-    Software Engineer
-    Experience:
-    - Senior Developer at Tech Corp (2020-Present)
-    - Junior Developer at Startup Inc (2018-2020)
-    Education:
-    - B.S. Computer Science, University of Tech (2018)
-    Skills:
-    - JavaScript, React, Node.js
-    - Python, Machine Learning
-    - AWS, Docker
-  `;
+// Example usage - uncomment to test
+// async function main() {
+//   const sampleResume = `
+//     John Doe
+//     Software Engineer
+//     Experience:
+//     - Senior Developer at Tech Corp (2020-Present)
+//     - Junior Developer at Startup Inc (2018-2020)
+//     Education:
+//     - B.S. Computer Science, University of Tech (2018)
+//     Skills:
+//     - JavaScript, React, Node.js
+//     - Python, Machine Learning
+//     - AWS, Docker
+//   `;
 
-  try {
-    const analysis = await analyzeResume(sampleResume);
-    console.log("Resume Analysis:", analysis);
-  } catch (error) {
-    console.error("Failed to analyze resume:", error);
-  }
-}
-
-// Uncomment to test
-// main();
+//   try {
+//     const analysis = await analyzeResume(sampleResume);
+//     console.log("Resume Analysis:", analysis);
+//   } catch (error) {
+//     console.error("Failed to analyze resume:", error);
+//   }
+// }

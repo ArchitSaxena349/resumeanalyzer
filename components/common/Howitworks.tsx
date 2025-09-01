@@ -1,4 +1,4 @@
-import { BrainCircuit, FileOutput, FileText, Pizza } from "lucide-react";
+import { BrainCircuit, FileOutput, FileText } from "lucide-react";
 import React, { ReactNode } from "react";
 
 type Step = {
