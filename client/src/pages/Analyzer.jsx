@@ -26,7 +26,7 @@ export default function Analyzer() {
         try {
             // Using logic to determine whether to use localhost or relative path could be added here
             // But for now keeping simple localhost:5000 as per previous config or relative /api
-            const response = await axios.post('http://localhost:5000/api/analyze', formData, {
+            const response = await axios.post('https://resumeanalyzer-37t1.onrender.com/api/analyze', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setResult(response.data);
